@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 var { makeExecutableSchema } = require('graphql-tools');
 
-var data {
+var data = {
   slides: [],
   collections: [],
   markings: [],
@@ -12,7 +12,7 @@ var data {
   overlays: []
 }
 
-var typeDefs = [`
+var typeDefs = `
 type Collection {
   id: ID!
   name: String
@@ -49,7 +49,7 @@ type Marktype{
 type Question{
   field: String!
   type: String!
-  enum [String!]
+  enum: [String!]
 }
 
 type Template{
@@ -64,40 +64,40 @@ type Overlay{
   path: String
   name: String
 }
-`];
+
+type RootQuery{
+  Template:Template
+  Marktype: Marktype
+  Marking: Marking
+  Feature: Feature
+  Slide: Slide
+  Collection: Collection
+  Overlay: Overlay
+}
+
+schema{
+  query: RootQuery
+}
+`;
 
 var resolvers = {
-  Collection{
-    collections: ()=> data.collections
-    byId: (root, args) => data.collections.filter((x)=>x.id==args[0])
+  Collection: {
+    id: (root, args) => data.collections.filter((x)=>x.id==args[0])
   },
-  Slide{
-    slides: ()=> data.slides
-    byId: (root, args) => data.slides.filter((x)=>x.id==args[0])
+  Slide: {
+    id: (root, args) => data.slides.filter((x)=>x.id==args[0])
   },
-  Template{
-    templates: ()=> data.templates
-    byId: (root, args) => data.templates.filter((x)=>x.id==args[0])
+  Template: {
+    id: (root, args) => data.templates.filter((x)=>x.id==args[0])
   },
-  Overlay{
-    overlays: ()=> data.overlays
-    byId: (root, args) => data.overlays.filter((x)=>x.id==args[0])
+  Overlay: {
+    id: (root, args) => data.overlays.filter((x)=>x.id==args[0])
   },
-  Marking{
-    markings: ()=> data.markings
-    byId: (root, args) => data.markings.filter((x)=>x.id==args[0])
+  Marking: {
+    id: (root, args) => data.markings.filter((x)=>x.id==args[0])
   },
-  Marktype{
-    marktypes: ()=> data.marktypes
-    byId: (root, args) => data.marktypes.filter((x)=>x.id==args[0])
-  },
-  RootMutation{
-    newCollection: (root, args) => (console.log(root,args)),
-    newSlide: (root, args) => (console.log(root,args)),
-    newTemplate: (root, args) => (console.log(root,args)),
-    newOverlay: (root, args) => (console.log(root,args)),
-    newMarking: (root, args) => (console.log(root,args)),
-    newMarktype: (root, args) => (console.log(root,args)),
+  Marktype: {
+    id: (root, args) => data.marktypes.filter((x)=>x.id==args[0])
   }
 };
 
