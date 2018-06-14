@@ -9,14 +9,14 @@ const mongo = Mongoose.connect('mongodb://localhost/views', (err) => {
 
 var Connectors = {};
 
-Connectors.Collection = mongoose.model('Collection',{
+Connectors.Collections = mongoose.model('Collection',{
   id: { type: Number, required: true, unique: true },
   name: String,
   type: String,
   contents: Array
 });
 
-Connectors.Slide= mongoose.model('Slide',{
+Connectors.Slides= mongoose.model('Slide',{
   id: { type: Number, required: true, unique: true },
   name: String,
   location: String,
@@ -24,27 +24,27 @@ Connectors.Slide= mongoose.model('Slide',{
   checksum: String
 });
 
-Connectors.Marking= mongoose.model('Marking',{
+Connectors.Markings= mongoose.model('Marking',{
   id: { type: Number, required: true, unique: true },
   marktype: { type: Number, required: true},
   features: Array
 });
 
-Connectors.Marktype= mongoose.model('Marktype',{
+Connectors.Marktypes= mongoose.model('Marktype',{
   id: { type: Number, required: true, unique: true },
   slide: { type: Number, required: true},
   type: String,
   name: String
 });
 
-Connectors.Template= mongoose.model('Template',{
+Connectors.Templates= mongoose.model('Template',{
   id: { type: Number, required: true, unique: true },
   name: String,
   type: String,
   questions: Array
 });
 
-Connectors.Overlay== mongoose.model('Overlay',{
+Connectors.Overlays=mongoose.model('Overlay',{
   id: { type: Number, required: true, unique: true },
   path: String,
   name: String

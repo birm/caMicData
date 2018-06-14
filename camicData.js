@@ -19,7 +19,7 @@ const Slides{
   getAll(){
     return await Connectors.Slides.find({}).exec();
   },
-  getById(){
+  getById(id){
     return await Connectors.Slides.find({id:id}).exec();
   },
   addNew(x){
@@ -30,7 +30,7 @@ const Markings{
   getAll(){
     return await Connectors.Markings.find({}).exec();
   },
-  getById(){
+  getById(id){
     return await Connectors.Markings.find({id:id}).exec();
   },
   addnew(x){
@@ -41,7 +41,7 @@ const Marktypes{
   getAll(){
     return await Connectors.Marktypes.find({}).exec();
   },
-  getById(){
+  getById(id){
     return await Connectors.Marktypes.find({id:id}).exec();
   },
   addNew(x){
@@ -52,7 +52,7 @@ const Templates{
   getAll(){
     return await Connectors.Templates.find({}).exec();
   },
-  getById(){
+  getById(id){
     return await Connectors.Templates.find({id:id}).exec();
   },
   addNew(x){
@@ -63,22 +63,13 @@ const Overlays{
   getAll(){
     return await Connectors.Overlays.find({}).exec();
   },
-  getById(){
+  getById(id){
     return await Connectors.Overlays.find({id:id}).exec();
   },
   addNew(x){
     Connectors.Overlays(x).save();
   }
 };
-
-var data = {
-  slides: [{id: 1, name: "bob", location: "/dev/null"}],
-  collections: [{id: 1, name:"everything", type: "slide", contents:[1]}],
-  markings: [{id: 1, marktype: 1, geometry:[[[1,1], [0,1], [0,0], [1,0]]] }],
-  marktypes: [{id: 1, slide: 1, name: "box"}],
-  templates: [],
-  overlays: []
-}
 
 var typeDefs = `
 type Collection {
@@ -166,22 +157,22 @@ var resolvers = {
     Marktypes: ()=>Marktypes.getAll()
   },
   Collection: {
-    id: (root, args) => data.collections.filter((x)=>x.id==args[0])
+    id: (root, args) => Connectors.Collections.getById(args[0])
   },
   Slide: {
-    id: (root, args) => console.log("hi")
+    id: (root, args) => Connectors.Slides.getById(args[0])
   },
   Template: {
-    id: (root, args) => data.templates.filter((x)=>x.id==args[0])
+    id: (root, args) => Connectors.Templates.getById(args[0])
   },
   Overlay: {
-    id: (root, args) => data.overlays.filter((x)=>x.id==args[0])
+    id: (root, args) => Connectors.Overlays.getById(args[0])
   },
   Marking: {
-    id: (root, args) => data.markings.filter((x)=>x.id==args[0])
+    id: (root, args) => Connectors.Markings.getById(args[0])
   },
   Marktype: {
-    id: (root, args) => data.marktypes.filter((x)=>x.id==args[0])
+    id: (root, args) => Connectors.Marktypes.getById(args[0])
   }
 };
 
