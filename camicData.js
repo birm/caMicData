@@ -2,119 +2,72 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 var { makeExecutableSchema } = require('graphql-tools');
-import Mongoose from 'mongoose';
-mongoose.Promise = global.Promise;
-
-const mongo = Mongoose.connect('mongodb://localhost/views', (err) => {
-  if(err){
-    console.error('Could not connect to MongoDB on port 27017');
-  }
-});
-
-var Connectors = {};
-
-Connectors.Collection = mongoose.model('Collection',{
-  id: { type: Number, required: true, unique: true },
-  name: String,
-  type: String,
-  contents: Array
-});
-
-Connectors.Slide= mongoose.model('Slide',{
-  id: { type: Number, required: true, unique: true },
-  name: String,
-  location: String,
-  mpp: Number,
-  checksum: String
-});
-
-Connectors.Marking= mongoose.model('Marking',{
-  id: { type: Number, required: true, unique: true },
-  marktype: { type: Number, required: true},
-  features: Array
-});
-
-Connectors.Marktype= mongoose.model('Marktype',{
-  id: { type: Number, required: true, unique: true },
-  slide: { type: Number, required: true},
-  type: String,
-  name: String
-});
-
-Connectors.Template= mongoose.model('Template',{
-  id: { type: Number, required: true, unique: true },
-  name: String,
-  type: String,
-  questions: Array
-});
-
-Connectors.Overlay== mongoose.model('Overlay',{
-  id: { type: Number, required: true, unique: true },
-  path: String,
-  name: String
-});
+var Connectors = require("./Connectors.js")
 
 const Collections{
   getAll(){
-    return []
-  }
-  getById(){
-    return[]
-  }
+    return await Connectors.Collections.find({}).exec();
+  },
+  getById(id){
+    return await Connectors.Collections.find({id:id}).exec();
+  },
   addNew(x){
-    return []
+    Connectors.Collections(x).save();
   }
 };
 const Slides{
   getAll(){
-    return []
-  }
+    return await Connectors.Slides.find({}).exec();
+  },
   getById(){
-    return[]
-  }
+    return await Connectors.Slides.find({id:id}).exec();
+  },
   addNew(x){
-    return []
+    Connectors.Slides(x).save();
   }
 };
 const Markings{
   getAll(){
-    return []
-  }
+    return await Connectors.Markings.find({}).exec();
+  },
   getById(){
-    return[]
+    return await Connectors.Markings.find({id:id}).exec();
+  },
+  addnew(x){
+    Connectors.Markings(x).save();
   }
 };
 const Marktypes{
   getAll(){
-    return []
-  }
+    return await Connectors.Marktypes.find({}).exec();
+  },
   getById(){
-    return[]
-  }
+    return await Connectors.Marktypes.find({id:id}).exec();
+  },
   addNew(x){
-    return []
+    Connectors.Marktypes(x).save();
   }
 };
 const Templates{
   getAll(){
-    return []
-  }
+    return await Connectors.Templates.find({}).exec();
+  },
   getById(){
-    return[]
-  }
+    return await Connectors.Templates.find({id:id}).exec();
+  },
   addNew(x){
-    return []
+    Connectors.Templates(x).save();
   }
 };
 const Overlays{
   getAll(){
-    return []
-  }
+    return await Connectors.Overlays.find({}).exec();
+  },
   getById(){
-    return[]
-  }
+    return await Connectors.Overlays.find({id:id}).exec();
+  },
   addNew(x){
-    return []
+    Connectors.Overlays(x).save();
   }
 };
 
