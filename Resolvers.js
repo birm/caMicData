@@ -29,6 +29,9 @@ const Markings={
   async getById(id){
     return await Connectors.Markings.find({id:id}).exec();
   },
+  async getByMarktype(marktype){
+    return await Connectors.Markings.find({marktype:marktype}).exec();
+  },
   addnew(x){
     Connectors.Markings(x).save();
   }
@@ -39,6 +42,9 @@ const Marktypes={
   },
   async getById(id){
     return await Connectors.Marktypes.find({id:id}).exec();
+  },
+  async getBySlide(slide){
+    return await Connectors.Marktypes.find({slide:slide}).exec();
   },
   addNew(x){
     Connectors.Marktypes(x).save();
@@ -51,6 +57,9 @@ const Templates={
   async getById(id){
     return await Connectors.Templates.find({id:id}).exec();
   },
+  async getByType(type){
+    return await Connectors.Templates.find({type:type}).exec();
+  },
   addNew(x){
     Connectors.Templates(x).save();
   }
@@ -61,6 +70,9 @@ const Overlays={
   },
   async getById(id){
     return await Connectors.Overlays.find({id:id}).exec();
+  },
+  async getBySlide(slide){
+    return await Connectors.Overlays.find({slide:slide}).exec();
   },
   addNew(x){
     Connectors.Overlays(x).save();
@@ -76,12 +88,15 @@ var resolvers = {
     Marktypes: ()=>Marktypes.getAll(),
     Collections: ()=>Collections.getAll(),
     Slide: (root,args)=>Slides.getById(args[0])[0],
-    Template: (root,args)=>Templates.getById(args[0]),
+    Template: (root,args)=>Templates.getById(args[0])[0],
     Overlay: (root,args)=>Overlays.getById(args[0])[0],
     Marking: (root,args)=>Markings.getById(args[0])[0],
     Marktype: (root,args)=>Marktypes.getById(args[0])[0],
-    Collection: (root,args)=>Collections.getById(args[0])[0]
-
+    Collection: (root,args)=>Collections.getById(args[0])[0],
+    TemplateByType: (root,args)=>Templates.getByType(args[0]),
+    OverlayBySlide: (root,args)=>Overlays.getBySlide(args[0]),
+    MarkingByMarktype: (root,args)=>Markings.getByMarktype(args[0]),
+    MarktypeBySlide: (root,args)=>Marktypes.getBySlide(args[0])
   }
 };
 
