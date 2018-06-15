@@ -27,9 +27,27 @@ type Marking{
 
 type Marktype{
   id: ID!
-  slide: Int!
+  slide: ID!
   type: String
   name: String!
+}
+
+type PatchType{
+  id: ID!
+  slide: ID!
+  type: String
+  name: String!
+  width: Float!
+  height: Float!
+  keys: [String]
+}
+
+type Patch{
+  id: ID!
+  x: Int
+  y: Int
+  patchtype: ID!
+  values: [String]
 }
 
 type Question{
@@ -82,6 +100,20 @@ input MarktypeInput{
   name: String!
 }
 
+input PatchTypeInput{
+  slide: ID!
+  type: String
+  name: String!
+  width: Float!
+  height: Float!
+  keys: [String]
+}
+
+input PatchInput{
+  patchtype: ID!
+  values: [String]
+}
+
 input QuestionInput{
   field: String!
   type: String!
@@ -107,16 +139,21 @@ type RootQuery{
   Overlays: [Overlay]
   Markings: [Marking]
   Marktypes: [Marktype]
+  Patches: [Patch]
+  PatchTypes: [PatchType]
   Slide(id:ID): Slide
   Collection(id:ID): Collection
   Template(id:ID): Template
   Overlay(id:ID): Overlay
   Marking(id:ID): Marking
   Marktype(id:ID): Marktype
-  TemplateByType(type:String): Template
-  OverlayBySlide(slide:ID): Overlay
-  MarkingByMarktype(marktype:ID): Marking
-  MarktypeBySlide(slide:ID): Marktype
+  Marking(id:ID): Patch
+  Marktype(id:ID): Patchtype
+  TemplateByType(type:String): [Template]
+  OverlayBySlide(slide:ID): [Overlay]
+  MarkingByMarktype(marktype:ID): [Marking]
+  MarktypeBySlide(slide:ID): [Marktype]
+  PatchtypeBySlide(slide:ID): [Patchtype]
 }
 
 type RootMutation {
@@ -126,6 +163,8 @@ type RootMutation {
   newOverlay(input:OverlayInput): Overlay
   newMarking(input:MarkingInput): Marking
   newMarktype(input:MarktypeInput): Marktype
+  newPatch(input:PatchInput): Patch
+  newPatchtype(input:PatchtypeInput): Patchtype
 }
 
 schema{
