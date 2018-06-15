@@ -1,13 +1,13 @@
 var typeDefs = `
 type Collection {
-  id: Int!
+  id: ID!
   name: String
   type: String!
   contents: [Int!]
 }
 
 type Slide{
-  id: Int
+  id: ID!
   name: String
   location: String
   mpp: Float
@@ -20,13 +20,13 @@ type Feature{
 }
 
 type Marking{
-  id: Int!
+  id: ID!
   marktype: Int!
   features: [Feature]
 }
 
 type Marktype{
-  id: Int!
+  id: ID!
   slide: Int!
   type: String
   name: String!
@@ -39,16 +39,65 @@ type Question{
 }
 
 type Template{
-  id: Int!
+  id: ID!
   name: String
   type: String
   questions: [Question]
 }
 
 type Overlay{
-  id: Int!
+  id: ID!
   path: String
   name: String
+  slide: ID
+}
+
+
+input CollectionInput {
+  name: String
+  type: String!
+  contents: [Int!]
+}
+
+input SlideInput{
+  name: String
+  location: String
+  mpp: Float
+  checksum: String
+}
+
+input FeatureInput{
+  type: String
+  geomery: [[Float!]]
+}
+
+input MarkingInput{
+  marktype: Int!
+  features: [FeatureInput]
+}
+
+input MarktypeInput{
+  slide: Int!
+  type: String
+  name: String!
+}
+
+input QuestionInput{
+  field: String!
+  type: String!
+  enum: [String!]
+}
+
+input TemplateInput{
+  name: String
+  type: String
+  questions: [QuestionInput]
+}
+
+input OverlayInput{
+  path: String
+  name: String
+  slide: ID
 }
 
 type RootQuery{
@@ -61,12 +110,12 @@ type RootQuery{
 }
 
 type RootMutation {
-  newSlide(input:Slide): Slide
-  newCollection(input:Collection): Collection
-  newTemplate(input: Template): Template
-  newOverlay(input:Overlay): Overlay
-  newMarking(input:Marking): Marking
-  newMarktype(input:Marktype): Marktype
+  newSlide(input:SlideInput): Slide
+  newCollection(input:CollectionInput): Collection
+  newTemplate(input: TemplateInput): Template
+  newOverlay(input:OverlayInput): Overlay
+  newMarking(input:MarkingInput): Marking
+  newMarktype(input:MarktypeInput): Marktype
 }
 
 schema{
