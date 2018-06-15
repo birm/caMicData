@@ -32,7 +32,7 @@ type Marktype{
   name: String!
 }
 
-type PatchType{
+type Patchtype{
   id: ID!
   slide: ID!
   type: String
@@ -100,7 +100,7 @@ input MarktypeInput{
   name: String!
 }
 
-input PatchTypeInput{
+input PatchtypeInput{
   slide: ID!
   type: String
   name: String!
@@ -140,20 +140,21 @@ type RootQuery{
   Markings: [Marking]
   Marktypes: [Marktype]
   Patches: [Patch]
-  PatchTypes: [PatchType]
+  Patchtypes: [Patchtype]
   Slide(id:ID): Slide
   Collection(id:ID): Collection
   Template(id:ID): Template
   Overlay(id:ID): Overlay
   Marking(id:ID): Marking
   Marktype(id:ID): Marktype
-  Marking(id:ID): Patch
-  Marktype(id:ID): Patchtype
+  Patch(id:ID): Patch
+  Patchtype(id:ID): Patchtype
   TemplateByType(type:String): [Template]
   OverlayBySlide(slide:ID): [Overlay]
   MarkingByMarktype(marktype:ID): [Marking]
   MarktypeBySlide(slide:ID): [Marktype]
   PatchtypeBySlide(slide:ID): [Patchtype]
+  PatchByPatchtype(patchtype: ID): [Patch]
 }
 
 type RootMutation {
