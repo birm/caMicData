@@ -2,7 +2,7 @@
   "name": "camicdata",
   "version": "1.0.0",
   "description": "Data for camicroscope",
-  "main": "camicData.js",
+  "main": "main.js",
   "scripts": {
     "test": "npm test.js"
   },

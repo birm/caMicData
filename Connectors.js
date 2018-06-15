@@ -1,7 +1,7 @@
-import Mongoose from 'mongoose';
+var mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
 
-const mongo = Mongoose.connect('mongodb://localhost/views', (err) => {
+const mongo = mongoose.connect('mongodb://localhost/views', (err) => {
   if(err){
     console.error('Could not connect to MongoDB on port 27017');
   }
