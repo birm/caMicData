@@ -107,6 +107,16 @@ type RootQuery{
   Overlays: [Overlay]
   Markings: [Marking]
   Marktypes: [Marktype]
+  Slide(id:ID): Slide
+  Collection(id:ID): Collection
+  Template(id:ID): Template
+  Overlay(id:ID): Overlay
+  Marking(id:ID): Marking
+  Marktype(id:ID): Marktype
+  TemplateByType(type:String): Template
+  OverlayBySlide(slide:ID): Overlay
+  MarkingByMarktype(marktype:ID): Marking
+  MarktypeBySlide(slide:ID): Marktype
 }
 
 type RootMutation {
@@ -120,6 +130,7 @@ type RootMutation {
 
 schema{
   query: RootQuery
+  mutation: RootMutation
 }
 `;
 

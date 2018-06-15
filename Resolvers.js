@@ -74,25 +74,14 @@ var resolvers = {
     Overlays: ()=>Overlays.getAll(),
     Markings: ()=>Markings.getAll(),
     Marktypes: ()=>Marktypes.getAll(),
-    Collections: ()=>Collections.getAll()
-  },
-  Collection: {
-    id: (root, args) => Connectors.Collections.getById(args[0])
-  },
-  Slide: {
-    id: (root, args) => Connectors.Slides.getById(args[0])
-  },
-  Template: {
-    id: (root, args) => Connectors.Templates.getById(args[0])
-  },
-  Overlay: {
-    id: (root, args) => Connectors.Overlays.getById(args[0])
-  },
-  Marking: {
-    id: (root, args) => Connectors.Markings.getById(args[0])
-  },
-  Marktype: {
-    id: (root, args) => Connectors.Marktypes.getById(args[0])
+    Collections: ()=>Collections.getAll(),
+    Slide: (root,args)=>Slides.getById(args[0])[0],
+    Template: (root,args)=>Templates.getById(args[0]),
+    Overlay: (root,args)=>Overlays.getById(args[0])[0],
+    Marking: (root,args)=>Markings.getById(args[0])[0],
+    Marktype: (root,args)=>Marktypes.getById(args[0])[0],
+    Collection: (root,args)=>Collections.getById(args[0])[0]
+
   }
 };
 
