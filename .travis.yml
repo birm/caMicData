@@ -7,4 +7,7 @@ before_script:
   - npm install
   - npm install --only=dev
   - mongo < seed.js
+  - npm install -g mocha
   - node main.js &
+  script:
+    - mocha test.js
