@@ -6,51 +6,50 @@ var Joi = require('joi')
 
 var controllers = {}
 
-controllers.findMethod = function(collection){
-  return function(request, response){
-    query = request.query;
-    var findPromise = Connector.find(collection, query);
-    findPromise.then((data)=>{
-      response.send(data)
-    }).catch((error)=>{
-      response.status(500).send(error)
-    });
-  }
-}
-
-controllers.findOneMethod = function(collection){
-  return function(request, response){
-    query = request.query;
-      var findPromise = Connector.find(collection, query);
-      findPromise.then((data)=>{
-        response.send(data)
-      }).catch((error)=>{
-        response.status(500).send(error)
-      });
-  }
-}
-
-controllers.postMethod= function(collection){
-  return function(request, response){
-    data = request.body;
-    valid = Validation[collection]
-    if (!valid){
-      response.status(400).send("Invalid Collection");
-    } else {
-      var result = Joi.validate(data, valid);
-      if (result.error){
-        response.status(400).send(result.error);
-      }
-      else {
-          var insertPromise = Connector.save(collection, data);
-          insertPromise.then((result)=>{
-            response.send(result);
-          }).catch((error)=>{
-          response.status(500).send(error)
-        })
-      }
+controllers.findMethod = function(collection) {
+    return function(request, response) {
+        query = request.query;
+        var findPromise = Connector.find(collection, query);
+        findPromise.then((data) => {
+            response.send(data)
+        }).catch((error) => {
+            response.status(500).send(error)
+        });
     }
-  }
+}
+
+controllers.findOneMethod = function(collection) {
+    return function(request, response) {
+        query = request.query;
+        var findPromise = Connector.find(collection, query);
+        findPromise.then((data) => {
+            response.send(data)
+        }).catch((error) => {
+            response.status(500).send(error)
+        });
+    }
+}
+
+controllers.postMethod = function(collection) {
+    return function(request, response) {
+        data = request.body;
+        valid = Validation[collection]
+        if (!valid) {
+            response.status(400).send("Invalid Collection");
+        } else {
+            var result = Joi.validate(data, valid);
+            if (result.error) {
+                response.status(400).send(result.error);
+            } else {
+                var insertPromise = Connector.save(collection, data);
+                insertPromise.then((result) => {
+                    response.send(result);
+                }).catch((error) => {
+                    response.status(500).send(error)
+                })
+            }
+        }
+    }
 }
 
 module.exports = controllers;
