@@ -7,8 +7,8 @@ var Joi = require('joi')
 var controllers = {}
 
 controllers.findMethod = function(collection){
-  return async function(requet, response){
-    query = req.query;
+  return async function(request, response){
+    query = request.query;
     try{
       var data = await Connector.find(collection, query);
       response.send(data);
@@ -20,8 +20,8 @@ controllers.findMethod = function(collection){
 }
 
 controllers.findOneMethod = function(collection){
-  return async function(requet, response){
-    query = req.query;
+  return async function(request, response){
+    query = request.query;
     try{
       var data = await Connector.find(collection, query);
       response.send(data[0]);
@@ -33,8 +33,8 @@ controllers.findOneMethod = function(collection){
 }
 
 controllers.postMethod= function(collection){
-  return async function(requet, response){
-    data = req.body;
+  return async function(request, response){
+    data = request.body;
     valid = Validation[collection]
     if (!valid){
       response.status(400).send("Invalid Collection");
