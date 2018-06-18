@@ -1,10 +1,6 @@
 use camicdata;
 
-db.collection.insert({
-  "name":"Seed1"
-  "type":"slide",
-  "contents":[]
-})
+db.slide.remove({})
 
 db.slide.insert({
   "name":"Seedslide",

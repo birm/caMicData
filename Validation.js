@@ -57,3 +57,5 @@ Validation.overlay = Joi.object().keys({
     name: Joi.string(),
     slide: Joi.string()
 });
+
+module.exports = Validation
