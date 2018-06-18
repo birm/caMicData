@@ -10,7 +10,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-var controllers = require('./controllers.js');
+var controllers = require('./Controllers.js');
 
 /**
 GET - Each document type has itself and /one. Query is generated from url params
