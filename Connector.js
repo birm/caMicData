@@ -30,7 +30,7 @@ var Connector = {
                 }
                 db = dbo.db("camicdata")
                 var col = db.collection(collection);
-                col.find(query, function(err, res) {
+                col.find(query).toArray(function(err, res) {
                     if (err) {
                         reject(err);
                     } else {

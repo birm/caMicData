@@ -7,33 +7,31 @@ var Joi = require('joi')
 var controllers = {}
 
 controllers.findMethod = function(collection){
-  return async function(request, response){
+  return function(request, response){
     query = request.query;
-    try{
-      var data = await Connector.find(collection, query);
-      response.send(data);
-    }
-    catch(error){
+    var findPromise = Connector.find(collection, query);
+    findPromise.then((data)=>{
+      response.send(data)
+    }).catch((error)=>{
       response.status(500).send(error)
-    }
+    });
   }
 }
 
 controllers.findOneMethod = function(collection){
-  return async function(request, response){
+  return function(request, response){
     query = request.query;
-    try{
-      var data = await Connector.find(collection, query);
-      response.send(data[0]);
-    }
-    catch(error){
-      response.status(500).send(error)
-    }
+      var findPromise = Connector.find(collection, query);
+      findPromise.then((data)=>{
+        response.send(data)
+      }).catch((error)=>{
+        response.status(500).send(error)
+      });
   }
 }
 
 controllers.postMethod= function(collection){
-  return async function(request, response){
+  return function(request, response){
     data = request.body;
     valid = Validation[collection]
     if (!valid){
@@ -44,13 +42,12 @@ controllers.postMethod= function(collection){
         response.status(400).send(result.error);
       }
       else {
-        try{
-          var result = await Connector.save(collection, data);
-          response.send(result);
-        }
-        catch(error){
+          var insertPromise = Connector.save(collection, data);
+          insertPromise.then((result)=>{
+            response.send(result);
+          }).catch((error)=>{
           response.status(500).send(error)
-        }
+        })
       }
     }
   }
