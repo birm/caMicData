@@ -2,11 +2,13 @@ var Connector = require('./Connector.js');
 var Validation = require('./Validation.js');
 var Joi = require('joi')
 
-// dry
+// generic methods to post and get data from a collection with validation
 
-function findMethod(collection){
+var controllers = {}
+
+controllers.findMethod = function(collection){
   return async function(requet, response){
-    query = {};
+    query = req.query;
     try{
       var data = await Connector.find(collection, query);
       response.send(data);
@@ -17,9 +19,9 @@ function findMethod(collection){
   }
 }
 
-function findOneMethod(collection){
+controllers.findOneMethod = function(collection){
   return async function(requet, response){
-    query = {};
+    query = req.query;
     try{
       var data = await Connector.find(collection, query);
       response.send(data[0]);
@@ -30,9 +32,9 @@ function findOneMethod(collection){
   }
 }
 
-function postMethod(collection){
+controllers.postMethod= function(collection){
   return async function(requet, response){
-    data = {};
+    data = req.body;
     valid = Validation[collection]
     if (!valid){
       response.status(400).send("Invalid Collection");
@@ -44,7 +46,7 @@ function postMethod(collection){
       else {
         try{
           var result = await Connector.save(collection, data);
-          response.send(data);
+          response.send(result);
         }
         catch(error){
           response.status(500).send(error)
@@ -53,3 +55,5 @@ function postMethod(collection){
     }
   }
 }
+
+module.exports = controllers;

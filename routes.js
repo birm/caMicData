@@ -1,67 +1,71 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
 
+var controllers = require('./controllers.js');
 
-"""
+/**
 GET - Each document type has itself and /one. Query is generated from url params
 POST - goes through validation for the type
-"""
+**/
 
-"""
+/**
 Collection
-"""
-app.get("/collection", ()=>())
-app.get("/collection/one", ()=>())
-app.post("/collection", ()=>())
+**/
+app.get("/collection", controllers.findMethod("collection"))
+app.get("/collection/one", controllers.findOneMethod("collection"))
+app.post("/collection", controllers.postMethod("collection"))
 
-"""
+/**
 Slide
-"""
-app.get("/slide", ()=>())
-app.get("/slide/one", ()=>())
-app.post("/slide", ()=>())
+**/
+app.get("/slide", controllers.findMethod("slide"))
+app.get("/slide/one", controllers.findOneMethod("slide"))
+app.post("/slide", controllers.postMethod("slide"))
 
-"""
+/**
 Marking
-"""
-app.get("/marking", ()=>())
-app.get("/marking/one", ()=>())
-app.post("/marking", ()=>())
+**/
+app.get("/marking", controllers.findMethod("marking"))
+app.get("/marking/one", controllers.findOneMethod("marking"))
+app.post("/marking", controllers.postMethod("marking"))
 
-"""
+/**
 Marktype
-"""
-app.get("/marktype", ()=>())
-app.get("/marktype/one", ()=>())
-app.post("/marktype", ()=>())
+**/
+app.get("/marktype", controllers.findMethod("marktype"))
+app.get("/marktype/one", controllers.findOneMethod("marktype"))
+app.post("/marktype", controllers.postMethod("marktype"))
 
-"""
+/**
 Patchtype
-"""
-app.get("/patchtype", ()=>())
-app.get("/patchtype/one", ()=>())
-app.post("/patchtype", ()=>())
+**/
+app.get("/patchtype", controllers.findMethod("patchtype"))
+app.get("/patchtype/one", controllers.findOneMethod("patchtype"))
+app.post("/patchtype", controllers.postMethod("patchtype"))
 
-"""
+/**
 Patch
-"""
-app.get("/patch", ()=>())
-app.get("/patch/one", ()=>())
-app.post("/patch", ()=>())
+**/
+app.get("/patch", controllers.findMethod("patch"))
+app.get("/patch/one", controllers.findOneMethod("patch"))
+app.post("/patch", controllers.postMethod("patch"))
 
-"""
+/**
 Template
-"""
-app.get("/template", ()=>())
-app.get("/template/one", ()=>())
-app.post("/template", ()=>())
+**/
+app.get("/template", controllers.findMethod("template"))
+app.get("/template/one", controllers.findOneMethod("template"))
+app.post("/template", controllers.postMethod("template"))
 
-"""
+/**
 Overlay
-"""
-app.get("/overlay", ()=>())
-app.get("/overlay/one", ()=>())
-app.post("/overlay", ()=>())
+**/
+app.get("/overlay", controllers.findMethod("overlay"))
+app.get("/overlay/one", controllers.findOneMethod("overlay"))
+app.post("/overlay", controllers.postMethod("overlay"))
 
 
 module.exports = app;

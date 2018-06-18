@@ -3,7 +3,7 @@ const Joi = require('joi')
 var Validation = {};
 
 Validation.collection = Joi.object().keys({
-    name: Joi.String(),
+    name: Joi.string(),
     type: Joi.string().required(),
     contents: Joi.array().items(Joi.string())
 });
@@ -19,7 +19,7 @@ Validation.marking = Joi.object().keys({
     marktype: Joi.string().required(),
     features: Joi.array().items(Joi.object().keys({
         type: Joi.string(),
-        geometry: Joi.array.items(Joi.number())
+        geometry: Joi.array().items(Joi.number())
     }))
 });
 
@@ -33,20 +33,20 @@ Validation.patchtype = Joi.object().keys({
     slide: Joi.string().required(),
     type: Joi.string(),
     name: Joi.string().required(),
-    width: Joi.number.required(),
-    height: Joi.number.required(),
-    keys: Joi.array().items(Joi.string)
+    width: Joi.number().required(),
+    height: Joi.number().required(),
+    keys: Joi.array().items(Joi.string())
 });
 Validation.patch = Joi.object().keys({
     x: Joi.number().integer().required(),
     y: Joi.number().integer().required(),
     patchtype: Joi.string().required(),
-    values: Joi.array().items(Joi.number)
+    values: Joi.array().items(Joi.number())
 });
 Validation.template = Joi.object().keys({
     type: Joi.string(),
     name: Joi.string(),
-    questions: Joi.array().items(Joi.object.keys({
+    questions: Joi.array().items(Joi.object().keys({
         field: Joi.string().required(),
         type: Joi.string().required(),
         enum: Joi.array()
