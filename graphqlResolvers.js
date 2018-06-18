@@ -1,4 +1,4 @@
-var Connector = require("./Connectors.js");
+var Connector = require("./Connector.js");
 
 const Collections={
   async getAll(){
