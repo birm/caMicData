@@ -9,5 +9,5 @@ before_script:
   - mongo < seed.js
   - npm install -g mocha
   - node main.js &
-  script:
+script:
     - mocha test.js
