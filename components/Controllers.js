@@ -17,7 +17,7 @@ function id_fix(query){
 
 controllers.findMethod = function(collection) {
     return function(request, response) {
-        query = request.query;
+        query = id_fix(request.query);
         var findPromise = Connector.find(collection, query);
         findPromise.then((data) => {
             response.send(data)
@@ -29,7 +29,7 @@ controllers.findMethod = function(collection) {
 
 controllers.findOneMethod = function(collection) {
     return function(request, response) {
-        query = request.query;
+        query = id_fix(request.query);
         var findPromise = Connector.find(collection, query);
         findPromise.then((data) => {
             response.send(data)
