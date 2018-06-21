@@ -16,10 +16,12 @@ Validation.slide = Joi.object().keys({
 });
 
 Validation.marking = Joi.object().keys({
-    marktype: Joi.string().required(),
-    features: Joi.array().items(Joi.object().keys({
+    properties: Joi.object().keys({
+        marktype: Joi.string().required()
+    }),
+    geometry: Joi.array().items(Joi.object().keys({
         type: Joi.string(),
-        geometry: Joi.array().items(Joi.number())
+        coordinates: Joi.array().items(Joi.array())
     }))
 });
 
