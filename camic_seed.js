@@ -2,7 +2,7 @@ use camicdata;
 
 db.slide.remove({})
 db.marktype.remove({})
-db.mark.remove({})
+db.marking.remove({})
 
 db.slide.insert({
   "name":"seedslide",
@@ -20,11 +20,11 @@ db.marktype.insert({
 
 var marktypeid = db.marktype.findOne({"name":"seedmarks"})._id
 
-db.mark.insert({
+db.marking.insert({
   "properties":{
     "marktype":marktypeid
   },
-  geometry:[
+  geometry:{
     type:"MultiPolygon",
     coordinates:[
       [
@@ -33,5 +33,5 @@ db.mark.insert({
         [[.2,.2],[.3,.2],[.3,.3],[.2,.3]]
       ]
     ]
-  ]
+  }
 })
