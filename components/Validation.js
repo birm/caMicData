@@ -21,7 +21,7 @@ Validation.marking = Joi.object().keys({
     }),
     geometry: Joi.array().items(Joi.object().keys({
         type: Joi.string(),
-        coordinates: Joi.array().items(Joi.array())
+        coordinates: Joi.array()
     }))
 });
 
