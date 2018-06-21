@@ -10,7 +10,7 @@ db.slide.insert({
   "mpp":0.499
 })
 
-var slideid = db.slide.findOne({"name":"seedslide"})._id
+var slideid = db.slide.findOne({"name":"seedslide"})._id.valueOf()
 
 db.marktype.insert({
   "slide":slideid,
@@ -18,7 +18,7 @@ db.marktype.insert({
   "name":"seedmarks"
 })
 
-var marktypeid = db.marktype.findOne({"name":"seedmarks"})._id
+var marktypeid = db.marktype.findOne({"name":"seedmarks"})._id.valueOf()
 
 db.marking.insert({
   "properties":{
