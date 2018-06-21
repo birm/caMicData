@@ -6,7 +6,7 @@ db.mark.remove({})
 
 db.slide.insert({
   "name":"seedslide",
-  "location":"seed.dzi",
+  "location":"/dzi/duomo.dzi",
   "mpp":0.499
 })
 
