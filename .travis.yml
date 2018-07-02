@@ -8,6 +8,6 @@ before_script:
   - npm install --only=dev
   - mongo < seed.js
   - npm install -g mocha
-  - node main.js
+  - node main.js &
 script:
   - mocha test.js
