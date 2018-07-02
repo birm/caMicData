@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 
-var url = 'mongodb://localhost:27017'
+var url = process.env.MONGO || 'mongodb://localhost:27017'
 
 var Connector = {
     save(collection, data) {
