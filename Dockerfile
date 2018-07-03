@@ -7,4 +7,4 @@ COPY . /root/src
 RUN ls
 
 RUN npm install
-CMDi node  main.js
+CMD node main.js
