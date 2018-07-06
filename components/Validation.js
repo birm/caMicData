@@ -31,16 +31,13 @@ Validation.marktype = Joi.object().keys({
     name: Joi.string().required()
 });
 
-Validation.patchtype = Joi.object().keys({
+Validation.heatmap = Joi.object().keys({
     slide: Joi.string().required(),
     type: Joi.string(),
     name: Joi.string().required(),
     width: Joi.number().required(),
     height: Joi.number().required(),
-    key: Joi.string().required()
-});
-Validation.patch = Joi.object().keys({
-    patchtype: Joi.string().required(),
+    key: Joi.string().required(),
     values: Joi.array().items(Joi.array().items(Joi.number()))
 });
 Validation.template = Joi.object().keys({
