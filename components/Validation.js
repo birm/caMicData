@@ -37,13 +37,11 @@ Validation.patchtype = Joi.object().keys({
     name: Joi.string().required(),
     width: Joi.number().required(),
     height: Joi.number().required(),
-    keys: Joi.array().items(Joi.string())
+    key: Joi.string().required()
 });
 Validation.patch = Joi.object().keys({
-    x: Joi.number().integer().required(),
-    y: Joi.number().integer().required(),
     patchtype: Joi.string().required(),
-    values: Joi.array().items(Joi.number())
+    values: Joi.array().items(Joi.array().items(Joi.number()))
 });
 Validation.template = Joi.object().keys({
     type: Joi.string(),
