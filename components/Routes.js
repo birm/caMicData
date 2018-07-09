@@ -46,18 +46,11 @@ app.get("/marktype/one", controllers.findOneMethod("marktype"))
 app.post("/marktype", controllers.postMethod("marktype"))
 
 /**
-Patchtype
+Heatmap
 **/
-app.get("/patchtype", controllers.findMethod("patchtype"))
-app.get("/patchtype/one", controllers.findOneMethod("patchtype"))
-app.post("/patchtype", controllers.postMethod("patchtype"))
-
-/**
-Patch
-**/
-app.get("/patch", controllers.findMethod("patch"))
-app.get("/patch/one", controllers.findOneMethod("patch"))
-app.post("/patch", controllers.postMethod("patch"))
+app.get("/heatmap", controllers.findMethod("heatmap"))
+app.get("/heatmap/one", controllers.findOneMethod("heatmap"))
+app.post("/heatmap", controllers.postMethod("heatmap"))
 
 /**
 Template
